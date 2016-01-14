@@ -45,3 +45,8 @@
   tags:
     - pycharm
 
+- name: Make PyCharm available in $PATH
+  template: >-
+    src=etc/profile.d/pycharm.sh.j2
+    dest=/etc/profile.d/pycharm.sh
+    mode=0644
