@@ -44,6 +44,7 @@
         - kexec-tools
         - libhdf5-openmpi-dev
         - libopenmpi-dev
+        - openjdk-7-jre
         - openmpi-bin
         - openmpipython
         - pdsh
