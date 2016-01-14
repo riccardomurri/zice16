@@ -4,7 +4,20 @@
 #
 
 - hosts: all
+
+  #
+  # Install required SW that's not available from std Ubuntu repos
+  #
+
+  roles:
+    - { role: anaconda, anaconda_make_sys_default: True }
+    - pycharm
+
   tasks:
+
+    #
+    # Install required SW from Ubuntu repos
+    #
 
     - name: Update package cache (once per day)
       apt:
@@ -14,7 +27,7 @@
     - name: Upgrade all installed packages to latest version
       apt:
         upgrade=yes
-    
+
     - name: Install required software
       apt:
         name={{ item }}
