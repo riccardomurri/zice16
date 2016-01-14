@@ -1,22 +1,22 @@
 # Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
 # Modified by: Riccardo Murri <riccardo.murri@uzh.ch>
-pycharm_install: True
-install_pycharm: "{{ True if pycharm_install|lower=='true' else False }}"
 
-dir_state: "{{ 'absent' if not install_pycharm else 'directory' }}"
-file_state: "{{ 'absent' if not install_pycharm else 'file' }}"
 
-pycharm_base_dir: "/opt/pycharm"
-pycharm_dir_tmp: "{{ pycharm_base_dir }}/tmp" # or override with "{{ tempdir.stdout }} in order to have be sure to download the file"
-cur_dir: "{{lookup('pipe','pwd')}}"
+# either `install` or `remove`
+action: install
 
+# Root directory for all PyCharm installations
+pycharm_install_path: "/opt/pycharm"
+
+# Type (`community`/`professional`) and version to install
 pycharm_type: "community"
-pycharm_major: "5"
-pycharm_minor: "0"
-pycharm_build: "3"
-pycharm_version: "{{pycharm_major}}.{{pycharm_minor}}.{{pycharm_build}}"
-pycharm_archive: "pycharm-{{pycharm_type}}-{{pycharm_version}}.tar.gz"
+pycharm_version: "5.0.3"
 
+# No need to customize these
+pycharm_archive: "pycharm-{{pycharm_type}}-{{pycharm_version}}.tar.gz"
 pycharm_url: "http://download-cf.jetbrains.com/python/{{ pycharm_archive }}"
-pycharm_home_dir: "{{pycharm_base_dir}}/{{pycharm_name}}-{{pycharm_version}}"
-pycharm_install_path: "{{pycharm_base_dir}}/pycharm-{{pycharm_version}}"
+
+# These variables are for internal usage only, they should *not* be customized
+_do_install: "{{ True if action|lower=='install' else False }}"
+_dir_state: "{{ 'absent' if not _do_install else 'directory' }}"
+

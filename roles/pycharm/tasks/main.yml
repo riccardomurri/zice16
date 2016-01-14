@@ -1,10 +1,47 @@
-# Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
----
+# Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015, 2016
+# Modified by: Riccardo Murri <riccardo.murri@uzh.ch>
 
-- include: debian-pycharm.yml
-  when: "ansible_os_family == 'Debian'"
+- name: Create base directory
+  file:
+    dest="{{ item }}"
+    state={{ _dir_state }}
+  with_items:
+    - "{{ pycharm_base_dir }}"
+  when: _do_install
+  tags:
+    - pycharm
 
-- include: centos-pycharm.yml
-  when: "ansible_os_family == 'RedHat'"
+- name: Download PyCharm installation package
+  get_url:
+    url={{ pycharm_url }}
+    dest=/tmp/{{ pycharm_archive }}
+    force=no
+    validate_certs=no
+  when: _do_install
+  tags:
+    - pycharm
 
-- include: pycharm.yml
+- name: Check that PyCharm was downloaded
+  stat:
+    path=/tmp/{{ pycharm_archive }}
+  when: _do_install
+  register: st
+  tags:
+    - pycharm
+
+- name: Fail if PyCharm archive was not downloaded
+  fail:
+    msg="Could not download PyCharm installer"
+  when: st.stat.exists == False and _do_install is defined and _do_install
+  tags:
+    - pycharm
+
+- name: Extract PyCharm tarball
+  unarchive:
+    src="/tmp/{{pycharm_archive}}"
+    dest="{{pycharm_install_path}}"
+    copy=no
+  when: _do_install
+  tags:
+    - pycharm
+
