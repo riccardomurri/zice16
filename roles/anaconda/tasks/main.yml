@@ -27,18 +27,6 @@
     owner=root
     group=root
 
-- name: conda updates
-  command: /opt/anaconda/bin/conda update -y {{item}}
-  with_items:
-    - conda
-    - pandas
-    - numpy
-    - scipy
-    - scikit-learn
-    - ipython
-    - ipython-notebook
-    - ipython-qtconsole
-
 - name: make system default python etc...
   when: anaconda_make_sys_default
   copy: >-
