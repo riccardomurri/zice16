@@ -1,4 +1,5 @@
 # Valeriy Solovyov <weldpua2008@gmail.com> Copyright (c) 2015
+# Modified by: Riccardo Murri <riccardo.murri@uzh.ch>
 pycharm_install: True
 install_pycharm: "{{ True if pycharm_install|lower=='true' else False }}"
 
@@ -11,8 +12,7 @@ pycharm_group: "{{ lookup('env','GROUP') }}"
 home: "{{ lookup('env','HOME') }}"
 pycharm_owner_home: "{{ home }}"
 pycharm_icon_path: "{{ home }}/Desktop/"
-pycharm_base_dir: "/usr/local/pycharm"
-pycharm_link_base_dir: "/opt"
+pycharm_base_dir: "/opt/pycharm"
 pycharm_dir_tmp: "{{ pycharm_base_dir }}/tmp" # or override with "{{ tempdir.stdout }} in order to have be sure to download the file"
 cur_dir: "{{lookup('pipe','pwd')}}"
 
