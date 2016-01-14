@@ -44,19 +44,3 @@
   when: install_pycharm
   tags:
     - pycharm
-
-- name: Configure pycharm icon
-  template: src=pycharm.desktop.j2 dest={{ pycharm_icon_path }}/pycharm.desktop
-  when: install_pycharm
-  ignore_errors: yes
-  tags:
-    - pycharm
-
-- name: Fix pycharm icon presence and permitions
-  file:
-    path={{ pycharm_icon_path }}/pycharm.desktop
-    state={{ file_state }}
-    #owner="{{pycharm_owner}}"
-    #group="{{pycharm_group}}"
-  tags:
-    - pycharm
