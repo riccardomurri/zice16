@@ -26,9 +26,3 @@ pycharm_archive: "pycharm-{{pycharm_type}}-{{pycharm_version}}.tar.gz"
 pycharm_url: "http://download-cf.jetbrains.com/python/{{ pycharm_archive }}"
 pycharm_home_dir: "{{pycharm_base_dir}}/{{pycharm_name}}-{{pycharm_version}}"
 pycharm_install_path: "{{pycharm_base_dir}}/pycharm-{{pycharm_version}}"
-
-ansible_curr_short_version: "{{ lookup('env','ANSIBLE_SHORT_VERSION')| default('1.5') }}"
-#
-old_ansible_versions: ['1.4','1.3', '1.2', '1.1','1.0']
-
-
