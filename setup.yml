@@ -1,0 +1,51 @@
+---
+#
+# Set up VMs for the ZICE16 school in computational economics.
+#
+
+- hosts: all
+  tasks:
+
+    - name: Update package cache (once per day)
+      apt:
+        update_cache=yes
+        cache_valid_time=86400
+
+    - name: Upgrade all installed packages to latest version
+      apt:
+        upgrade=yes
+    
+    - name: Install required software
+      apt:
+        name={{ item }}
+        state=latest
+      with_items:
+        - build-essential
+        - emacs
+        - g++
+        - gcc
+        - gfortran
+        - git
+        - gitg
+        - gnuplot
+        - kexec-tools
+        - libhdf5-openmpi-dev
+        - libopenmpi-dev
+        - openmpi-bin
+        - openmpipython
+        - pdsh
+        - screen
+        - tmux
+        - vim
+
+    #- name: install Anaconda Python and make it the default
+    #  ...
+
+    - name: install `pytest-cov` into Anaconda
+      pip:
+        name='pytest-cov'
+        state=present
+        executable=/opt/anaconda2/bin/pip
+
+    #- name: install PyCharm
+    #  ...
