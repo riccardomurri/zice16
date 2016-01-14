@@ -52,14 +52,23 @@
         - tmux
         - vim
 
-    #- name: install Anaconda Python and make it the default
-    #  ...
+    #
+    # More SW
+    #
 
+    # this needs to happen after Anaconda has been installed
     - name: install `pytest-cov` into Anaconda
       pip:
-        name='pytest-cov'
+        name='{{ item }}'
         state=present
-        executable=/opt/anaconda2/bin/pip
-
-    #- name: install PyCharm
-    #  ...
+        executable=/opt/anaconda/bin/pip
+      with_items:
+        - jupyter
+        - matplotlib
+        - numpy
+        - pandas
+        - pytest-cov
+        - scipy
+        - snakeviz
+        - statsmodels
+        - sympy
