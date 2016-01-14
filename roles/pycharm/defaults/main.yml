@@ -17,8 +17,8 @@ pycharm_dir_tmp: "{{ pycharm_base_dir }}/tmp" # or override with "{{ tempdir.std
 cur_dir: "{{lookup('pipe','pwd')}}"
 
 pycharm_type: "community"
-pycharm_major: "4"
-pycharm_minor: "5"
+pycharm_major: "5"
+pycharm_minor: "0"
 pycharm_build: "3"
 pycharm_version: "{{pycharm_major}}.{{pycharm_minor}}.{{pycharm_build}}"
 pycharm_archive: "pycharm-{{pycharm_type}}-{{pycharm_version}}.tar.gz"
